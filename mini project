@@ -1,0 +1,48 @@
+#mini project Banking system
+
+class BankAccount:
+    def __init__(self, account_number, pin, balance=0):
+        self.account_number = account_number
+        self.pin = pin
+        self.balance = balance
+
+    def login(self, entered_pin):
+        return self.pin == entered_pin
+
+    def deposit(self, amount):
+        self.balance += amount
+        return f"Deposited ${amount}. Current balance: ${self.balance}"
+
+    def withdraw(self, amount):
+        if amount <= self.balance:
+            self.balance -= amount
+            return f"Withdrew ${amount}. Current balance: ${self.balance}"
+        else:
+            return "Insufficient funds."
+
+# Example usage
+def main():
+    # Creating a new account
+    account_number = "123456789"
+    pin = "1234"
+    account = BankAccount(account_number, pin)
+
+    # Account login
+    entered_pin = input("Enter your PIN: ")
+    if account.login(entered_pin):
+        print("Login successful.")
+    else:
+        print("Invalid PIN. Exiting.")
+        return
+
+    # Depositing amount
+    deposit_amount = float(input("Enter the amount to deposit: "))
+    print(account.deposit(deposit_amount))
+
+    # Withdrawing amount
+    withdraw_amount = float(input("Enter the amount to withdraw: "))
+    print(account.withdraw(withdraw_amount))
+
+if __name__ == "__main__":
+    main()
+
